@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>anton | home</title>
+  </head>
+  <style>
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+  a:hover {
+  color:brown;
+ }
+  </style>
+  <body>
+    <script>
+      if ('geolocation' in navigator){
+          navigator.geolocation.getCurrentPosition(async function(position){
+          console.log(position);
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          document.getElementById('latitude').textContent = lat;
+          document.getElementById('longitude').textContent = lon;
+
+          const data = { lat, lon };
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }
+          const response = fetch('/api', options);
+          const json = response.json();
+          console.log(json)
+
+        });
+      }else{
+        
+      }
+    </script>
+    latitude: <span id="latitude"></span>&deg<br>
+    longitude: <span id="longitude"></span>&deg<br>
+    <a href="music.html">Music</a> 
+    |
+    <a href="reminder.html">new thing</a>
+  </body>
+</html>
