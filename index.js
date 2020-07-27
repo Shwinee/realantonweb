@@ -7,15 +7,35 @@ var fs = require('fs');
 
 const database = new Datastore('database.db');
 database.loadDatabase();
+const port = process.env.PORT || 3000;
 
-app.listen(3000, () => console.log('listening at 3000'));
+app.listen(port, () => console.log('listening at '+port));
 app.use(express.static('public'))
 app.use(express.json({ limit: '1mb' }));
+
+
+
+app.get('/api', (request, response) => {
+    database.find({}, (err, data) => {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    })
+}) 
+
+
+
 
 app.post('/api', (request, response) => {
     console.log(request.body);
     const data = request.body;
-    database.insert(data);
+    const timestamp = Date.now();
+    data.timestamp = timestamp;
+    if (!data.name == ''){
+        database.insert(data);
+    }
     response.json({
         status: 'success',
         latitude: data.lat,

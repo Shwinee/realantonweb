@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <a href="index.html">back</a><br>
     <title>anton | reminder</title>
   </head>  <style>
     a:link {
@@ -24,14 +25,14 @@
           document.getElementById('latitude').textContent = lat;
           document.getElementById('longitude').textContent = lon;
 
-          const data = { lat, lon };
-          const options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }
+          // const data = { lat, lon };
+          // const options = {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify(data)
+          // }
           const response = fetch('/api', options);
           const json = response.json();
           console.log(json)
@@ -69,6 +70,34 @@
     </select>
     <br>
     <button onclick="txt()">submit</button><br>
-    <a href="index.html">back</a>
   </body>
+  <br>
+  <br>
+  <h9>reminders</h9>
+  <br>
+  <br>
+  <script>
+    getdata();
+
+    async function getdata(){
+      const response = await fetch('/api');
+      const data = await response.json();
+
+      for (item of data){
+        const root = document.createElement('div');
+        const name = document.createElement('div');
+        const content = document.createElement('div');
+
+        name.textContent = 'name: '+ item.name;
+        content.textContent = 'content: '+ item.text;
+
+
+        root.append(name, content);
+        document.body.append('-----------')
+        document.body.append(root);
+        document.body.append('-----------')
+      }
+      console.log(data);
+    }
+  </script>
 </html>
