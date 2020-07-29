@@ -42,11 +42,28 @@
         
       }
       function txt(){
+        location.reload();
         var name = document.getElementById("name1").value;
         var text = document.getElementById("text1").value;
         var gs = document.getElementById("reminderGS").value;
         var txtfile = true;
         const data = { text, name, txtfile, gs };
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }
+          const response = fetch('/api', options);
+          const json = response.json();
+          console.log(json)
+      }
+      function remove(){
+        location.reload();
+        var id = document.getElementById("key").value;
+
+        const data = { id };
           const options = {
             method: 'POST',
             headers: {
@@ -73,12 +90,15 @@
   </body>
   <br>
   <br>
-  <h9>reminders</h9>
+
+  <input id="key" placeholder="ID"><br>
+  <button onclick="remove()">remove</button>
+  
+
   <br>
   <br>
   <script>
     getdata();
-
     async function getdata(){
       const response = await fetch('/api');
       const data = await response.json();
@@ -87,12 +107,15 @@
         const root = document.createElement('div');
         const name = document.createElement('div');
         const content = document.createElement('div');
+        const gs = document.createElement('div');
+        const ID = document.createElement('div');
 
         name.textContent = 'name: '+ item.name;
         content.textContent = 'content: '+ item.text;
+        gs.textContent = 'gs: '+ item.gs;
+        ID.textContent = 'ID: '+ item._id;
 
-
-        root.append(name, content);
+        root.append(name, content, gs, ID);
         document.body.append('-----------')
         document.body.append(root);
         document.body.append('-----------')

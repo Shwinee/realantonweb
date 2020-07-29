@@ -25,9 +25,6 @@ app.get('/api', (request, response) => {
     })
 }) 
 
-
-
-
 app.post('/api', (request, response) => {
     console.log(request.body);
     const data = request.body;
@@ -37,11 +34,17 @@ app.post('/api', (request, response) => {
         database.insert(data);
     }
     response.json({
-        status: 'success',
-        latitude: data.lat,
-        longitude: data.lon
+        status: 'success'
     });
-    if (data.txtfile == true){
+    if (!data.id == ''){
+        console.log('removing: '+data.id);
+        database.remove({ _id: data.id }, {}, function (err, numRemoved) {
+            if (err){
+                console.log('error')
+            }
+        });
+    }
+    if (data.txtfile == false){
         console.log('also making a .txt file...');
         if (data.gs == 'Set'){
             fs.writeFile('Reminders/set/'+data.name+'.txt', data.text, function (err){
