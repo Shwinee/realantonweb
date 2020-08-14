@@ -103,24 +103,50 @@
       const response = await fetch('/api');
       const data = await response.json();
 
-      for (item of data){
-        const root = document.createElement('div');
-        const name = document.createElement('div');
-        const content = document.createElement('div');
-        const gs = document.createElement('div');
-        const ID = document.createElement('div');
+        for (item of data){
+        if (item.includes('media')){
 
-        name.textContent = 'name: '+ item.name;
-        content.textContent = 'content: '+ item.text;
-        gs.textContent = 'gs: '+ item.gs;
-        ID.textContent = 'ID: '+ item._id;
+        }else{
+            const root = document.createElement('div');
+            const name = document.createElement('div');
+            const content = document.createElement('div');
+            const gs = document.createElement('div');
+            const ID = document.createElement('div');
+    
+            name.textContent = 'name: '+ item.name;
+            content.textContent = 'content: '+ item.text;
+            gs.textContent = 'gs: '+ item.gs;
+            ID.textContent = 'ID: '+ item._id;
+    
+            root.append(name, content, gs, ID);
+            document.body.append('-----------')
+            document.body.append(root);
+            document.body.append('-----------')
+          }
+          console.log(data);
+          }
+        }
 
-        root.append(name, content, gs, ID);
-        document.body.append('-----------')
-        document.body.append(root);
-        document.body.append('-----------')
-      }
-      console.log(data);
-    }
+
+
+      // for (item of data){
+      //   const root = document.createElement('div');
+      //   const name = document.createElement('div');
+      //   const content = document.createElement('div');
+      //   const gs = document.createElement('div');
+      //   const ID = document.createElement('div');
+
+      //   name.textContent = 'name: '+ item.name;
+      //   content.textContent = 'content: '+ item.text;
+      //   gs.textContent = 'gs: '+ item.gs;
+      //   ID.textContent = 'ID: '+ item._id;
+
+      //   root.append(name, content, gs, ID);
+      //   document.body.append('-----------')
+      //   document.body.append(root);
+      //   document.body.append('-----------')
+      // }
+      // console.log(data);
+    
   </script>
 </html>
