@@ -3,7 +3,7 @@ const Datastore = require('nedb')
 const { request, response, text } = require('express');
 const app = express();
 var fs = require('fs');
-
+var bodyParser = require('body-parser');
 
 const database = new Datastore('database.db');
 database.loadDatabase();
@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('listening at '+port));
 app.use(express.static('public'))
 app.use(express.json({ limit: '1mb' }));
-
+app.use(bodyParser.urlencoded({ extended: false }))
 
 
 app.get('/api', (request, response) => {
@@ -24,7 +24,9 @@ app.get('/api', (request, response) => {
         response.json(data);
     })
 }) 
-
+app.post('/message', (request, response) =>{
+    database.insert(request);
+})
 app.post('/api', (request, response) => {
     console.log(request.body);
     const data = request.body;
