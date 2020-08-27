@@ -22,6 +22,7 @@ app.get('/api', (request, response) => {
             return;
         }
         response.json(data);
+        console.log(data);
     })
 }) 
 app.post('/message', (request, response) =>{
