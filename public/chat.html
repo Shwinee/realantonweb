@@ -18,26 +18,30 @@
     <script>
         getdata();
         async function getdata(){
-            const response = await fetch('/api');
-            const data = await response.json();
-            const root = document.createElement('div');
-            const name = document.createElement('div');
-            const content = document.createElement('div');
-            const gs = document.createElement('div');
-            const ID = document.createElement('div');
+          const response = await fetch('/api');
+          const data = await response.json();
+    
+            for (item of data){
+            if (item.includes('media')){
+    
+            }else{
+                const root = document.createElement('div');
+                const name = document.createElement('div');
+                const content = document.createElement('div');
+                const gs = document.createElement('div');
+                const ID = document.createElement('div');
         
-            name.textContent = 'name: '+ item.name;
-            content.textContent = 'content: '+ item.text;
-            gs.textContent = 'gs: '+ item.gs;
+                name.textContent = 'name: '+ item.name;
+                content.textContent = 'content: '+ item.text;
+                ID.textContent = 'ID: '+ item._id;
         
-            root.append(name, content, gs, ID);
-            
-            document.body.append(root);
-            document.body.append("hello there");
-
-              
-            console.log(data);
-        }
-            
+                root.append(content);
+                document.body.append('-----------')
+                document.body.append(root);
+                document.body.append('-----------')
+              }
+              console.log(data);
+              }
+            }
       </script>
 </html>
