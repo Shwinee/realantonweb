@@ -62,4 +62,29 @@
             width: 100%;
         }
     </style>
+    <script>
+        getdata();
+        async function getdata(){
+            const response = await fetch('/api');
+            const data = await response.json();
+            const root = document.createElement('div');
+            const name = document.createElement('div');
+            const content = document.createElement('div');
+            const gs = document.createElement('div');
+            const ID = document.createElement('div');
+        
+            name.textContent = 'name: '+ item.name;
+            content.textContent = 'content: '+ item.text;
+            gs.textContent = 'gs: '+ item.gs;
+            ID.textContent = 'ID: '+ item._id;
+        
+            root.append(name, content, gs, ID);
+            document.body.append('-----------')
+            document.body.append(root);
+            document.body.append('-----------')
+              
+            console.log(data);
+        }
+            
+      </script>
 </html>
