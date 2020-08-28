@@ -3,86 +3,42 @@
   <head>
     <title>anton | reminder</title>
   </head>  
-  <style>
-    a:link {
-      text-decoration: none;
-    }
-  
-    a:visited {
-      text-decoration: none;
-    }
-    a:hover {
-    color:brown;
-   }
-    </style>
-  <body>
-    <script>
-      function txt(){
-        location.reload();
-        var text = document.getElementById("text1").value;
-        const data = { text };
-          const options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }
-          const response = fetch('/api', options);
-          const json = response.json();
-          console.log(json)
-      }
-      function remove(){
-        var id = document.getElementById("key").value;
 
-        const data = { id };
-          const options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }
-          const response = fetch('/api', options);
-          const json = response.json();
-          console.log(json)
-      }
-    </script>
-    <input id="text1" placeholder="Message">
-    <button onclick="txt()">Submit</button><br>
-  </body>
-  <br>
-  <br>
-  
-
-  <br>
-  <br>
   <script>
-    getdata();
-    async function getdata(){
-      const response = await fetch('/api');
-      const data = await response.json();
+    /*                                                               send*/
+    function sendData(){
+      var text = document.getElementById("text1").value;
+      const data = { text };
+      
+      console.log(data);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
 
-        for (item of data){
-        if (item.includes('media')){
-
-        }else{
-            const root = document.createElement('div');
-            const name = document.createElement('div');
-            const content = document.createElement('div');
-            const ID = document.createElement('div');
-    
-            name.textContent = 'name: '+ item.name;
-            content.textContent = 'content: '+ item.text;
-            ID.textContent = 'ID: '+ item._id;
-    
-            root.append(content);
-            document.body.append('-----------')
-            document.body.append(root);
-            document.body.append('-----------')
-          }
-          console.log(data);
-          }
-        }
+      fetch('/api', options);
+    }
   </script>
+
+  <body>
+    <input id="text1" placeholder="Message">
+    <button onclick="sendData()">Submit</button><br>
+  </body>
+
+  <script>
+    /*                                                               get*/
+  </script>
+  <style>
+    body{
+      background-color: #2c2e2d;
+      position: fixed;
+      left: 40%;
+      bottom: 0;
+      right: 40%;
+      width: 20%;
+    }
+  </style>
 </html>
