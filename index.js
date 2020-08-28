@@ -13,9 +13,18 @@ const database = new Datastore('database.db');
 database.loadDatabase();
 
 app.post('/api', (request, response) => {
-    console.log("request sent");
+    console.log("message sent");
     const data = request.body;
-    database.insert(data);
+    if (data.text === 'clear pog?'){
+        console.log('clearing database...');
+        database.remove({ }, { multi: true }, function (err, numRemoved) {
+            database.loadDatabase(function (err) {
+              // done
+            });
+        });
+    }else{
+        database.insert(data);
+    }
     console.log(request.body);
     response.json({
         status: 'message sent',

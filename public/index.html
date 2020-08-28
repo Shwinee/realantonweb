@@ -1,54 +1,77 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>anton | home</title>
-  </head>
-  <style>
-  a:link {
-    text-decoration: none;
-  }
+    <title>chat app 0.1</title>
+  </head>  
 
-  a:visited {
-    text-decoration: none;
-  }
-  a:hover {
-  color:brown;
- }
-  </style>
-  <body>
-    <script>
-      if ('geolocation' in navigator){
-          navigator.geolocation.getCurrentPosition(async function(position){
-          console.log(position);
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          document.getElementById('latitude').textContent = lat;
-          document.getElementById('longitude').textContent = lon;
-
-          // const data = { lat, lon };
-          // const options = {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json'
-          //   },
-          //   body: JSON.stringify(data)
-          // }
-          // const response = fetch('/api', options);
-          // const json = response.json();
-          // console.log(json)
-
-        });
-      }else{
-        
+  <script>
+    /*                                                               send*/
+    function sendData(){
+      var text = document.getElementById("text1").value;
+      var time = Date.now();
+      const data = { text, time};
+      
+      console.log(data);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
       }
-    </script>
-    latitude: <span id="latitude"></span>&deg<br>
-    longitude: <span id="longitude"></span>&deg<br>
-    <a href="music.html">Music</a> 
-    |
-    <a href="reminder.html">new thing</a>
+      
+      fetch('/api', options);
+      location.reload();
+    }
+  </script>
+
+  <footer>
+    <span class="input">
+      <input type="text" id="text1" placeholder="Message">
+      <span></span>	
+    </span>
+    <button class="big-button" onclick="sendData()">Send</button>
+  </footer>
+  <body>
+
   </body>
+
+  <script>
+    /*                                                               get*/
+    getdata();
+
+    async function getdata(){
+      const response = await fetch('/api');
+      const data = await response.json();
+      //console.log(data);/*                               REMOVE THIS WHEN DONE          !!!!!!!!!!!!!!!!!*/
+      
+      for (item of data ){
+        const root = document.createElement('div');
+        const text = document.createElement('div');
+        text.textContent = `?: ${item.text}`;
+        const button = document.createElement('button');
+        button.innerHTML = "ID";
+        
+        
+        root.append(text)
+        document.body.append(root);
+      }
+    }
+  </script>
   <style>
-    
+    footer{
+      background-color: #2c2e2d;
+      position: fixed;
+      left: 40%;
+      bottom: 0;
+      right: 40%;
+      width: auto;
+      text-align: center;
+    }
+    body{
+      
+      font-family: "Lucida Console", Courier, monospace;
+      background-color: #2c2e2d;
+    }
   </style>
 </html>
