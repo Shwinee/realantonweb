@@ -25,6 +25,9 @@ app.post('/api', (request, response) => {
 
 app.get('/api', (request, response) => {
     database.find({}, (error, data) => {
+        if (error){
+            console.log(error);
+        }
         response.json(data);
-    });
+});
 })
