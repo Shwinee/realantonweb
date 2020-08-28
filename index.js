@@ -44,3 +44,16 @@ app.get('/api', (request, response) => {
         response.json(data);
 });
 })
+
+app.post('/footbook', (requst, response) => {
+    console.log("message sent");
+    const data = request.body;
+    if (!data.text === ''){
+        database.insert(data);
+    }
+    console.log(request.body);
+    response.json({
+        status: 'message sent',
+        text: data
+    })
+})

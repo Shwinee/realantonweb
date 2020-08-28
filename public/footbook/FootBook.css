@@ -5,7 +5,7 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #111; /* Black */
+    background-color: black; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
     }
@@ -36,10 +36,5 @@
     .sidenav a {font-size: 18px;}
 }
 body{
-    background-color: #2c2e2d;
-    position: fixed;
-    left: 40%;
-    bottom: 0;
-    right: 40%;
-    width: 100%;
+    text-align: center;
 }
