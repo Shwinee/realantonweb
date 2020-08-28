@@ -7,6 +7,7 @@
   <script>
     /*                                                               send*/
     function sendData(){
+      console.log('sending message...');
       var text = document.getElementById("text1").value;
       var time = Date.now();
       const data = { text, time};
@@ -21,7 +22,6 @@
       }
       
       fetch('/api', options);
-      location.reload();
     }
   </script>
 
@@ -31,6 +31,7 @@
       <span></span>	
     </span>
     <button class="big-button" onclick="sendData()">Send</button>
+    <button id="test" onclick="clear()">test123</button>
   </footer>
   <body>
 
@@ -39,7 +40,7 @@
   <script>
     /*                                                               get*/
     getdata();
-
+    
     async function getdata(){
       const response = await fetch('/api');
       const data = await response.json();
@@ -51,7 +52,7 @@
         text.textContent = `?: ${item.text}`;
         const button = document.createElement('button');
         button.innerHTML = "ID";
-        
+        root.id = "messages";
         
         root.append(text)
         document.body.append(root);
@@ -69,7 +70,6 @@
       text-align: center;
     }
     body{
-      
       font-family: "Lucida Console", Courier, monospace;
       background-color: #2c2e2d;
     }

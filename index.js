@@ -23,7 +23,11 @@ app.post('/api', (request, response) => {
             });
         });
     }else{
-        database.insert(data);
+        if (data.text === ''){
+
+        }else{
+            database.insert(data);
+        }
     }
     console.log(request.body);
     response.json({
