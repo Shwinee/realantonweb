@@ -38,3 +38,6 @@
 body{
     text-align: center;
 }
+p.b64{
+    display: none;
+}

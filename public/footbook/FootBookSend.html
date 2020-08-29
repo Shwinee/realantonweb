@@ -6,42 +6,7 @@
   
   <link rel="stylesheet" href="FootBookSend.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
-  <script>
-        /*                                                               send*/
-        function sendData(){
-            console.log('sending message...');
-            var text = document.getElementById("text1").value;
-            var img = document.getElementById('img');
-            img.crossOrigin = 'Anonymouse';
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2D');
-            canvas.height = this.naturalHeight;
-            canvas.width = this.naturalWidth;
-            ctx.drawImage(img);
-            var base64 = canvas.toDataURL('image');
-            /*
-            get image then turn it into base64 then send it.
-            [x] get image
-            [] turn into base64
-            [] POST it
-            [] GET it
-            [] GET it then display it
-            */
-            const data = { text, base64 };
-            console.log(data);
-                
-                const options = {
-                  method: 'POST',
-                  headers: {
-                        'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(data)
-                }
-                  
-              fetch('/api', options);
-            }
 
-  </script>
 
   <footer>
   
@@ -53,17 +18,67 @@
   </div>
   
   <body>
-    <input id="inp" type='file'>
-      <p id="b64"></p>
-    <img id="img" height="150">
+    <input id="inp" type="file">
+    <p id="b64" class="b64">test</p>
+    <!-- <img id="img" height="150" src=""> -->
     <span class="input">
-
         <input type="text" id="text1" placeholder="Text"></input>
         <span></span>	
       </span>
       <button class="big-button" onclick="sendData()">Send</button>
+      <br>
+      <br>
+      <br>
+      <br>
+      <img id="img" height="150" src="">
   </body>
   <footer>
       
   </footer>
+  <script type="text/javascript">
+        function readFile() {
+          if (this.files && this.files[0]) {
+            var FR= new FileReader();
+            
+            FR.addEventListener("load", function(e) {
+              document.getElementById("img").src       = e.target.result;
+              document.getElementById("b64").innerHTML = e.target.result;
+              document.getElementById("b64").style.display === "none";
+            }); 
+            
+            FR.readAsDataURL( this.files[0] );
+          }
+}
+document.getElementById("inp").addEventListener("change", readFile);
+      /*                                                               send*/
+       function sendData(){
+            location.reload();
+           var text = document.getElementById("text1").value;
+           var base64 = document.getElementById("b64").textContent;
+          
+
+
+           /*
+           get image then turn it into base64 then send it.
+           [x] get image
+           [x] turn into base64
+           [x] POST it
+           [] GET it
+           [] GET it then display it
+           */
+           const data = { text, base64 };
+           console.log(data);
+
+               const options = {
+                 method: 'POST',
+                 headers: {
+                       'Content-Type': 'application/json'
+                 },
+                 body: JSON.stringify(data)
+               }
+                
+             fetch('/api', options);
+           }
+          
+</script>
 </html>

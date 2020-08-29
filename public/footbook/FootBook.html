@@ -18,12 +18,12 @@
       for (item of data ){
         const root = document.createElement('p');
         const text = document.createElement('p');
+        const image = document.createElement('img');
+        console.log(`${item.base64}`);
+        image.src = `${item.base64}`;
         text.textContent = `${item.text}`;
-        const button = document.createElement('button');
-        button.innerHTML = "ID";
-        root.id = "messages";
         
-        root.append(text)
+        root.append(text, image)
         document.body.append(root);
       }
     }
