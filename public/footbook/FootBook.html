@@ -16,14 +16,17 @@
       //console.log(data);/*                               REMOVE THIS WHEN DONE          !!!!!!!!!!!!!!!!!*/
       
       for (item of data ){
-        const root = document.createElement('p');
-        const text = document.createElement('p');
+        const root = document.createElement('div');
+        const text = document.createElement('div');
         const image = document.createElement('img');
-        console.log(`${item.base64}`);
+
+        root.className = "root";
+        text.className = "text";
+        image.className = "image";
         image.src = `${item.base64}`;
         text.textContent = `${item.text}`;
         
-        root.append(text, image)
+        root.append(text, image);
         document.body.append(root);
       }
     }
