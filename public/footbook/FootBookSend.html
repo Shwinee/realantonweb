@@ -52,7 +52,6 @@
 document.getElementById("inp").addEventListener("change", readFile);
       /*                                                               send*/
        function sendData(){
-            location.reload();
            var text = document.getElementById("text1").value;
            var base64 = document.getElementById("b64").textContent;
           
@@ -78,7 +77,8 @@ document.getElementById("inp").addEventListener("change", readFile);
                }
                 
              fetch('/api', options);
-           }
+            }
+            location.reload();
           
 </script>
 </html>
