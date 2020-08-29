@@ -23,6 +23,7 @@
     <!-- <img id="img" height="150" src=""> -->
     <span class="input">
         <input type="text" id="text1" placeholder="Text"></input>
+        <input type="text" id="name" placeholder="Name"></input>
         <span></span>	
       </span>
       <button class="big-button" onclick="sendData()">Send</button>
@@ -54,20 +55,20 @@ document.getElementById("inp").addEventListener("change", readFile);
        function sendData(){
            var text = document.getElementById("text1").value;
            var base64 = document.getElementById("b64").textContent;
-          
-
+           var name = document.getElementById("name").value;
+           var app = "footbook";
            
            /*
            get image then turn it into base64 then send it.
            [x] get image
            [x] turn into base64
            [x] POST it
-           [] GET it
-           [] GET it then display it
+           [x] GET it
+           [x] GET it then display it
+           DONE!
            */
-          const data = { text, base64 };
+          const data = {name, text, base64, app };
           console.log(data);
-          
                const options = {
                  method: 'POST',
                  headers: {
